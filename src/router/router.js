@@ -5,7 +5,7 @@ const routes = [
         path: '/',
         component: () => import(
             /* webpackChunkName: ListPage */
-            '../modules/pokemon/pages/ListPage'
+            '@/modules/pokemon/pages/ListPage'
         ) 
     },
     { 

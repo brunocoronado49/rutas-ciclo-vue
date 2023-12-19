@@ -1,16 +1,23 @@
 <template>
+  <Navbar />
   <img alt="Vue logo" src="./assets/logo.png">
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue'
+import Navbar from '@/modules/shared/components/Navbar'
 
 export default {
   name: 'App',
   components: {
-    
+    Navbar: defineAsyncComponent(() => import(
+      /* webpackChunkName: Navbar */
+      '@/modules/shared/components/Navbar'
+    ))
   }
 }
+    Navbar
 </script>
 
 <style>
