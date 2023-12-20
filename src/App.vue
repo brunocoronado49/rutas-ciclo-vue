@@ -6,7 +6,6 @@
 
 <script>
 import { defineAsyncComponent } from 'vue'
-import Navbar from '@/modules/shared/components/Navbar'
 
 export default {
   name: 'App',
@@ -17,7 +16,6 @@ export default {
     ))
   }
 }
-    Navbar
 </script>
 
 <style>
