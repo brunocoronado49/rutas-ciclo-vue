@@ -13,12 +13,14 @@ export default {
             name: 'Francisco'
         }
     },
+
     methods: {
         onChangeName() {
             this.name = 'Bruce'
         }
     },
 
+    // Lifecycle component
     beforeCreate() {
         console.log('beforeCreate')
     },
