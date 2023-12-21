@@ -1,8 +1,13 @@
 import { createWebHashHistory, createRouter } from 'vue-router'
 
 const routes = [
-    { 
+    {
         path: '/',
+        redirect: '/home'
+    },
+    { 
+        path: '/home',
+        name: 'home',
         component: () => import(
             /* webpackChunkName: ListPage */
             '@/modules/pokemon/pages/ListPage'
@@ -10,6 +15,7 @@ const routes = [
     },
     { 
         path: '/about',
+        name: 'about',
         // Lazyload of pages
         component: () => import(
             /* webpackChunkName: "AboutPage" */
@@ -17,7 +23,7 @@ const routes = [
         ) 
     },
     { 
-        path: '/:id',
+        path: '/pokemonid/:id',
         name: 'pokemon-id',
         component: () => import(
             /* webpackChunkName: PokemonPage */
@@ -30,10 +36,11 @@ const routes = [
     },
     { 
         path: '/:pathMatch(.*)*',
-        component: () => import(
-            /* webpackChunkName: NoPageFound */
-            '@/modules/shared/pages/NoPageFound'
-        ) 
+        // component: () => import(
+        //     /* webpackChunkName: NoPageFound */
+        //     '@/modules/shared/pages/NoPageFound'
+        // )
+        redirect: '/home'
     }
 ]
 
