@@ -3,44 +3,58 @@ import { createWebHashHistory, createRouter } from 'vue-router'
 const routes = [
     {
         path: '/',
-        redirect: '/home'
+        redirect: '/pokemon'
     },
-    { 
-        path: '/home',
-        name: 'home',
+    {
+        path: '/pokemon',
+        name: 'pokemon',
         component: () => import(
-            /* webpackChunkName: ListPage */
-            '@/modules/pokemon/pages/ListPage'
-        ) 
-    },
-    { 
-        path: '/about',
-        name: 'about',
-        // Lazyload of pages
-        component: () => import(
-            /* webpackChunkName: "AboutPage" */
-            '@/modules/pokemon/pages/AboutPage'
-        ) 
-    },
-    { 
-        path: '/pokemonid/:id',
-        name: 'pokemon-id',
-        component: () => import(
-            /* webpackChunkName: PokemonPage */
-            '@/modules/pokemon/pages/PokemonPage'
+            /* webpackChunkName: PokemonLayout */
+            '@/modules/pokemon/layouts/PokemonLayout'
         ),
-        props: (route) => {
-            const id = Number(route.params.id)
-            return isNaN(id) ? { id: 1 } : { id }
-        }
+        children: [
+            { 
+                path: 'home',
+                name: 'pokemon-home',
+                component: () => import(
+                    /* webpackChunkName: ListPage */
+                    '@/modules/pokemon/pages/ListPage'
+                )
+            },
+            { 
+                path: 'about',
+                name: 'pokemon-about',
+                // Lazyload of pages
+                component: () => import(
+                    /* webpackChunkName: "AboutPage" */
+                    '@/modules/pokemon/pages/AboutPage'
+                ) 
+            },
+            {
+                path: 'pokemonid/:id',
+                name: 'pokemon-id',
+                component: () => import(
+                    /* webpackChunkName: PokemonPage */
+                    '@/modules/pokemon/pages/PokemonPage'
+                ),
+                props: (route) => {
+                    const id = Number(route.params.id)
+                    return isNaN(id) ? { id: 1 } : { id }
+                }
+            },
+            {
+                path: '',
+                redirect: { name: 'pokemon-about' }
+            },
+        ],
     },
     { 
         path: '/:pathMatch(.*)*',
-        // component: () => import(
-        //     /* webpackChunkName: NoPageFound */
-        //     '@/modules/shared/pages/NoPageFound'
-        // )
-        redirect: '/home'
+        component: () => import(
+            /* webpackChunkName: NoPageFound */
+            '@/modules/shared/pages/NoPageFound'
+        )
+        // redirect: '/home'
     }
 ]
 
