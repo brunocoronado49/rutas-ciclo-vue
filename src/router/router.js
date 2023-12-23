@@ -44,7 +44,40 @@ const routes = [
             },
             {
                 path: '',
+                name: 'pokemon',
                 redirect: { name: 'pokemon-about' }
+            },
+        ],
+    },
+    {
+        path: '/dbz',
+        name: 'dbz',
+        component: () => import(
+            /* webpackChunkName: DragonBallLayout */
+            '@/modules/dbz/layouts/DragonBallLayout'
+        ),
+        children: [
+            {
+                path: 'characters',
+                name: 'dbz-characters',
+                component: () => import(
+                    /* webpackChunkName: Characters */
+                    '@/modules/dbz/pages/Characters'
+                )
+            },
+            { 
+                path: 'about',
+                name: 'dbz-about',
+                // Lazyload of pages
+                component: () => import(
+                    /* webpackChunkName: "About" */
+                    '@/modules/dbz/pages/About'
+                )
+            },
+            {
+                path: '',
+                name: 'dbz',
+                redirect: { name: 'dbz-characters' }
             },
         ],
     },
